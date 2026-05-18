@@ -54,7 +54,9 @@ export const AuthProvider = ({ children }) => {
       toast.success("Welcome back");
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed");
+      console.error("Login error", error);
+      const message = error.response?.data?.message || error.message || "Login failed";
+      toast.error(message);
       dispatch({ type: "STOP" });
       return false;
     }
@@ -70,7 +72,9 @@ export const AuthProvider = ({ children }) => {
       toast.success("Account created");
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || "Signup failed");
+      console.error("Signup error", error);
+      const message = error.response?.data?.message || error.message || "Signup failed";
+      toast.error(message);
       dispatch({ type: "STOP" });
       return false;
     }
